@@ -29,6 +29,10 @@ class q22 {
     this.element.style[camelizedProperty] = value;
     return this
   }
+  
+  on(listener, callback) {
+    this.element.addEventListener(listener, callback);
+  }
 }
 
 function q22a(iden) {
