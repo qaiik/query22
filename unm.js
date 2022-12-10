@@ -1,10 +1,11 @@
 const $utils = {
-  camel: e=>e.replace(/\b-([a-z])/g,(e,a)=>a.toUpperCase())
+  camel: e=>e.replace(/\b-([a-z])/g,(e,a)=>a.toUpperCase()),
+  getRawElement: iden => iden instanceof Event ? iden.target : iden instanceof q22 ? iden.element : iden instanceof HTMLElement || iden instanceof HTMLDocument ? iden : document.querySelector(iden)
 }
 
 class q22 {
   constructor(iden) {
-    this.element = iden instanceof q22 ? iden.element : iden instanceof HTMLElement || iden instanceof HTMLDocument ? iden : document.querySelector(iden)
+    this.element = $utils.getRawElement(iden)
   }
 
   text(innerText) {
@@ -32,6 +33,18 @@ class q22 {
   
   on(listener, callback) {
     this.element.addEventListener(listener, callback);
+    return this
+  }
+  
+  off(listener, callback) {
+    this.element.removeEventListener(listener, callback)
+    return this
+  }
+  
+  once(listener, callback) {
+    this.element.addEventListener(listener, callback, {once:true});
+    
+    return this
   }
 }
 
